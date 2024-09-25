@@ -18,12 +18,12 @@ const Signup = () => {
 
     const onSubmit = async (values) => {
         const formData = {
-            username:values.username,
-            email:values.email,
-            password:values.password
+            username: values.username,
+            email: values.email,
+            password: values.password
         }
         try {
-            const {data} = await EndPoints.Auth.register(formData);
+            const { data } = await EndPoints.Auth.register(formData);
             Success(data.message);
             setToken(data.access_token);
             setUser(data.user);
@@ -35,7 +35,7 @@ const Signup = () => {
     };
 
     return (
-        <section className="flex flex-wrap lg:h-screen lg:items-center">
+        <div className="flex flex-wrap lg:h-screen overflow-y-scroll lg:items-center">
             <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
                 <div className="mx-auto max-w-lg text-center">
                     <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
@@ -46,46 +46,46 @@ const Signup = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                     <div>
-                        <label htmlFor="username" className="sr-only">User Name</label>
+                        <label htmlFor="username" className="text-gray-800 text-[15px] mb-2 block">User Name</label>
                         <input
                             type="text"
                             {...register("username", { required: "Username is required" })}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter username"
                         />
                         {errors.username && <span className="text-red-500 text-xs">{errors.username.message}</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="sr-only">Email</label>
+                        <label htmlFor="email" className="text-gray-800 text-[15px] mb-2 block">Email</label>
                         <input
                             type="email"
-                            {...register("email", { 
+                            {...register("email", {
                                 required: "Email is required",
                                 pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                     message: "Invalid email address"
                                 }
                             })}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter email"
                         />
                         {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="sr-only">Password</label>
+                        <label htmlFor="password" className="text-gray-800 text-[15px] mb-2 block">Password</label>
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                {...register("password", { 
+                                {...register("password", {
                                     required: "Password is required",
                                     minLength: {
                                         value: 8,
                                         message: "Password must be at least 8 characters long"
                                     }
                                 })}
-                                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter password"
                             />
                             <button
@@ -100,15 +100,15 @@ const Signup = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="confirmPassword" className="sr-only">Confirm Password</label>
+                        <label htmlFor="confirmPassword" className="text-gray-800 text-[15px] mb-2 block">Confirm Password</label>
                         <div className="relative">
                             <input
                                 type={showConfirmPassword ? "text" : "password"}
-                                {...register("confirmPassword", { 
+                                {...register("confirmPassword", {
                                     required: "Please confirm your password",
                                     validate: value => value === getValues("password") || "Passwords do not match"
                                 })}
-                                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Confirm password"
                             />
                             <button
@@ -138,10 +138,10 @@ const Signup = () => {
                 </form>
             </div>
 
-            <div className="relative h-64 w-full sm:h-96 lg:h-full bg-gray-800 text-white lg:w-1/2 flex items-center justify-center">
-                <TbMessageChatbot className="text-9xl" />
+            <div className="relative h-screen w-full sm:h-screen lg:h-screen bg-gray-800 text-white lg:w-1/2 flex items-center justify-center">
+                <TbMessageChatbot className="text-9xl" style={{ fontSize: '15rem' }}  />
             </div>
-        </section>
+        </div>
     );
 };
 

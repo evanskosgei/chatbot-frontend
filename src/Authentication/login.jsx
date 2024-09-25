@@ -18,13 +18,13 @@ const Login = () => {
     const onSubmit = async (values) => {
         try {
             const { data } = await EndPoints.Auth.login(values);
-            if(data.message == "Login successful"){
+            if (data.message == "Login successful") {
                 Success(data.message)
                 setToken(data.access_token)
                 setUser(data.user);
                 navigate("/home");
-                
-            }else{
+
+            } else {
                 throw new Error(data.message)
             }
         } catch (error) {
@@ -45,23 +45,23 @@ const Login = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                     <div>
-                        <label htmlFor="email" className="sr-only">Email</label>
+                        <label htmlFor="email" className="text-gray-800 text-[15px] mb-2 block">Email</label>
                         <input
                             type="email"
                             {...register("email", { required: "Email is required", pattern: /^\S+@\S+$/i })}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter email"
                         />
                         {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="sr-only">Password</label>
+                        <label htmlFor="password" className="text-gray-800 text-[15px] mb-2 block">Password</label>
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 {...register("password", { required: "Password is required", minLength: 6 })}
-                                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                className="w-full rounded-lg border border-gray-600 outline-none p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter password"
                             />
                             <button
