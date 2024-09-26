@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../providers/AuthProvider';
-import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
     const { user, setUser } = useAuth()
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
     return (
         <>
             <nav className="bg-slate-200 border-gray-200">
@@ -26,20 +29,27 @@ const Navbar = () => {
             <nav className="bg-gray-50">
                 <div className="max-w-screen-xl px-4 py-3 mx-auto">
                     <div className="flex items-center font-semibold text-lg">
-                        <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-md">
+                        <ul className={`${isMenuOpen ? 'flex' : 'hidden'} flex-col sm:flex sm:flex-row font-medium mt-0 space-y-4 sm:space-y-0 sm:space-x-8 rtl:space-x-reverse text-md w-full sm:w-auto`}>
                             <li>
-                                <a href="/home" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500" aria-current="page">Home</a>
+                                <Link to="/home" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500" aria-current="page">Home</Link>
                             </li>
                             <li>
-                                <a href="/home/in-business-contacts" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">In Business</a>
+                                <Link to="/home/in-business-contacts" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">In Business</Link>
                             </li>
                             <li>
-                                <a href="/home/deleted-contacts" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">Deleted</a>
+                                <Link to="/home/deleted-contacts" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">Deleted</Link>
                             </li>
                             <li>
-                                <a href="/home/send-messages" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">Send Message(s)</a>
+                                <Link to="/home/send-messages" className="text-gray-900 hover:underline focus:text-blue-500 active:text-blue-500">Send Message(s)</Link>
                             </li>
                         </ul>
+
+                        <button
+                            onClick={toggleMenu}
+                            className="sm:hidden text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-lg p-2 ml-auto"
+                        >
+                            {isMenuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+                        </button>
                     </div>
                 </div>
             </nav>
